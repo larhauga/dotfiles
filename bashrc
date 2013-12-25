@@ -19,18 +19,18 @@ PS1="\[$LGRAY\]\A\[$RESET\] \[$DARKGRAY\]\u@\[$RESET\]\[$GRAY\]\h \W\[$RESET\] $
 
 EDITOR=vim
 
-if [ -d ~/.config/ ]; then
-    if [ -f ~/.config/envvar ]; then
-        . ~/.config/envvar
+if [ -d $HOME/.config/ ]; then
+    if [ -f $HOME/.config/envvar ]; then
+        . $HOME/.config/envvar
     else
-        if [ ! -f ~/.config/.notfirstnoenv ]; then
+        if [ ! -f $HOME/.config/.notfirstnoenv ]; then
             echo "Missing environment variables"
-            echo "Resolve this by adding config in ~/.config/envvar"
-            touch ~/.config/.notfirstnoenv
+            echo "Resolve this by adding config in $HOME/.config/envvar"
+            touch $HOME/.config/.notfirstnoenv
         fi
     fi
 
-    for file in ~/.config/.*
+    for file in $HOME/.config/.*
     do
         if [ -f $file ] && [[ ! $file =~ ".swp"|"bashrc"|"tmux.conf" ]]; then
             if [[ `hostname` =~ $jump ]]; then

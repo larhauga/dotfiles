@@ -12,7 +12,7 @@ help(){
 }
 
 time=`date +"%Y-%m-%d-%H%M"`
-config_dir="~/.config"
+config_dir="$HOME/.config"
 backup_dir="$HOME/.config/backup"
 
 if [ $# -eq 1 ]; then
@@ -22,27 +22,27 @@ if [ $# -eq 1 ]; then
             mkdir $backup_dir
         fi
         mkdir "$backup_dir/$time"
-        cp ~/.bashrc "$backup_dir/$time"
-        cp ~/.tmux.conf "$backup_dir/$time"
+        cp $HOME/.bashrc "$backup_dir/$time"
+        cp $HOME/.tmux.conf "$backup_dir/$time"
 
-        rm ~/.bashrc
-        rm ~/.tmux.conf
-        ln -s ~/.config/bashrc ~/.bashrc
-        ln -s ~/.config/tmux.conf ~/.tmux.conf
+        rm $HOME/.bashrc
+        rm $HOME/.tmux.conf
+        ln -s $HOME/.config/bashrc ~/.bashrc
+        ln -s $HOME/.config/tmux.conf ~/.tmux.conf
 
     elif [ "$1" = "rollback" ]; then
         last_backup=`ls -t $backup_dir/ | head -1`
         echo "Rolling back to last install, $last_backup"
-        rm ~/.bashrc
-        rm ~/.tmux.conf
-        cp $last_backup/* ~/.
+        rm $HOME/.bashrc
+        rm $HOME/.tmux.conf
+        cp $last_backup/* $HOME/.
 
     elif [ "$1" = "remove" ]; then
         echo "Removing configuration and reverting to latest config"
         first_backup=`ls -t $backup_dir/ | tail -1`
-        rm ~/.bashrc
-        rm ~/.tmux.conf
-        cp $first_backup/* ~/.
+        rm $HOME/.bashrc
+        rm $HOME/.tmux.conf
+        cp $first_backup/* $HOME/.
     else
         help
     fi
