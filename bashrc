@@ -20,17 +20,20 @@ PS1="\[$LGRAY\]\A\[$RESET\] \[$DARKGRAY\]\u@\[$RESET\]\[$GRAY\]\h \W\[$RESET\] $
 EDITOR=vim
 
 if [ -d $HOME/.config/ ]; then
-    if [ -f $HOME/.config/envvar ]; then
-        . $HOME/.config/envvar
+    if [ -d $HOME/.config/dotfiles && -f $HOME/.config/dotfiles/envvar ]; then
+        . $HOME/.config/dotfiles/envvar
+        echo $dotdir
     else
         if [ ! -f $HOME/.config/.notfirstnoenv ]; then
             echo "Missing environment variables"
-            echo "Resolve this by adding config in $HOME/.config/envvar"
+            echo "Resolve this by adding config in $HOME/.config/dotfiles/envvar"
+            echo "Using default path $HOME/.config/dotfiles"
             touch $HOME/.config/.notfirstnoenv
         fi
+        dotdir="$HOME/.config/dotfiles"
     fi
 
-    for file in $HOME/.config/.*
+    for file in $dotdir/.*
     do
         if [ -f $file ] && [[ ! $file =~ ".swp"|"bashrc"|"tmux.conf" ]]; then
             if [[ `hostname` =~ $jump ]]; then
