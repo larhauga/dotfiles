@@ -18,6 +18,7 @@ RET="$(if [[ $? = 0 ]]; then echo -ne "\[$TRUE\]> \[$RESET"; else echo -ne "\[$F
 PS1="\[$LGRAY\]\A\[$RESET\] \[$DARKGRAY\]\u@\[$RESET\]\[$GRAY\]\h \W\[$RESET\] $RET"
 
 EDITOR=vim
+verbose=1
 
 if [ -d $HOME/.config/ ]; then
     if [[ -d $HOME/.config/dotfiles && -f $HOME/.config/dotfiles/envvar ]]; then
@@ -34,21 +35,24 @@ if [ -d $HOME/.config/ ]; then
 
     for file in $dotdir/*
     do
-        if [ -f $file ] && [[ ! $file =~ ".swp"|"bashrc"|"tmux.conf" ]]; then
+        if [ -f $file ] && [[ ! $file =~ ".swp"|"bashrc"|"tmux.conf"|"envvar"$|"dotfiles.sh"$|"md"$ ]]; then
             if [[ `hostname` =~ $jump ]]; then
-                if [[ ! $file =~ $workfend|"*.local*" ]]; then
+                if [[ ! $file =~ $workfend ]]; then
                     . $file
                 fi
             elif [[ `hostname` =~ $workdomain ]]; then
-                if [[ $file =~ $workfend|"conf$"|"*.local*" ]]; then
+                if [[ $file =~ $workfend|"conf$" ]]; then
                     . $file
                 fi
             elif [[ `hostname` =~ $allconf ]]; then
-                if [[ $file =~ "conf$"|"*.local*" ]]; then
+                if [[ $file =~ "conf"$ ]]; then
                     . $file
                 fi
             else
                 if [[ ! $file =~ $workfend|"tmux"|"bashrc"|"gitignore" ]]; then
+                    if [ $verbose -eq 1 ]; then
+                        echo "Loading spesial file: $file; Add machine to envvar to default load"
+                    fi
                     . $file
                 fi
             fi
