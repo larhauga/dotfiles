@@ -12,8 +12,8 @@ help(){
 }
 
 time=`date +"%Y-%m-%d-%H%M"`
-config_dir="$HOME/.config"
-backup_dir="$HOME/.config/backup"
+config_dir="$HOME/.config/dotfiles"
+backup_dir="$HOME/.config/dotfiles/backup"
 
 if [ $# -eq 1 ]; then
     if [ "$1" = "install" ]; then
@@ -27,8 +27,8 @@ if [ $# -eq 1 ]; then
 
         rm $HOME/.bashrc
         rm $HOME/.tmux.conf
-        ln -s $HOME/.config/bashrc ~/.bashrc
-        ln -s $HOME/.config/tmux.conf ~/.tmux.conf
+        ln -s $config_dir/bashrc ~/.bashrc
+        ln -s $config_dir/tmux.conf ~/.tmux.conf
         echo "New configuration installed"
     elif [ "$1" = "rollback" ]; then
         last_backup=`ls -t $backup_dir/ | head -1`
