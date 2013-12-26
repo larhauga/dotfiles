@@ -6,7 +6,7 @@ dotfiles
 
 Installation
 -------------
-    git clone https://github.con/larhauga/dotfiles.git ~/.config
+    git clone https://github.con/larhauga/dotfiles.git ~/.config/dotfiles
     sh dotfiles.sh install|rollback|update|remove
 
 Configuration
