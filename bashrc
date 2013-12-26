@@ -32,7 +32,7 @@ if [ -d $HOME/.config/ ]; then
         dotdir="$HOME/.config/dotfiles"
     fi
 
-    for file in $dotdir/.*
+    for file in $dotdir/*
     do
         if [ -f $file ] && [[ ! $file =~ ".swp"|"bashrc"|"tmux.conf" ]]; then
             if [[ `hostname` =~ $jump ]]; then
