@@ -17,6 +17,14 @@ backup_dir="$HOME/.config/dotfiles/backup"
 
 if [ $# -eq 1 ]; then
     if [ "$1" = "install" ]; then
+        read -p "Use default path? $HOME/.config/dotfiles/ (Y/n): " yn
+        case $yn in
+            [Nn]* ) read -p "Spesify path: $HOME/" path;
+                    config_dir="$HOME/$path";backup_dir="$HOME/$path/backup";
+                    sed -i -e "s/dotdir.*//g" envvar;
+                    echo "dotdir=\"$config_dir\" #Edited during initial configuration" >> envvar; exit 0;;
+                * ) $config_dir="$HOME/.config/dotfiles";$backup_dir="$HOME/.config/dotfiles/backup";;
+        esac
         echo "Installing dotfiles"
         if [ ! -d $backup_dir ]; then
             mkdir $backup_dir
