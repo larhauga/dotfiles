@@ -22,8 +22,8 @@ if [ $# -eq 1 ]; then
             [Nn]* ) read -p "Spesify path: $HOME/" path;
                     config_dir="$HOME/$path";backup_dir="$HOME/$path/backup";
                     sed -i -e "s/dotdir.*//g" envvar;
-                    echo "dotdir=\"$config_dir\" #Edited during initial configuration" >> envvar; exit 0;;
-                * ) $config_dir="$HOME/.config/dotfiles";$backup_dir="$HOME/.config/dotfiles/backup";;
+                    echo "dotdir=\"$config_dir\" #Edited during initial configuration" >> envvar;;
+                * ) echo -n "";;
         esac
         echo "Installing dotfiles"
         if [ ! -d $backup_dir ]; then
@@ -45,6 +45,7 @@ if [ $# -eq 1 ]; then
         ln -s $config_dir/bashrc ~/.bashrc
         ln -s $config_dir/tmux.conf ~/.tmux.conf
         echo "New configuration installed"
+
     elif [ "$1" = "rollback" ]; then
         last_backup=`ls -t $backup_dir/ | head -1`
         echo "Rolling back to last install, $last_backup"
@@ -52,6 +53,7 @@ if [ $# -eq 1 ]; then
         rm $HOME/.tmux.conf
         cp $last_backup/* $HOME/.
         echo "Config has been rolled back"
+
     elif [ "$1" = "remove" ]; then
         echo "Removing configuration and reverting to latest config"
         first_backup=`ls -t $backup_dir/ | tail -1`
@@ -59,6 +61,7 @@ if [ $# -eq 1 ]; then
         rm $HOME/.tmux.conf
         cp $first_backup/* $HOME/.
         echo "Config has been removed"
+
     elif [ "$1" = "update" ]; then
         if [ ! -d $backup_dir ]; then
             mkdir $backup_dir
@@ -67,6 +70,7 @@ if [ $# -eq 1 ]; then
         cp $HOME/.bashrc "$backup_dir/$time"
         cp $HOME/.tmux.conf "$backup_dir/$time"
         git pull origin master
+
     else
         help
     fi
