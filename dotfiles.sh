@@ -36,7 +36,7 @@ if [ $# -eq 1 ]; then
         read -p "Do you want to update git repo first? (y/N) " yn
         case $yn in
             [Yy]* ) git pull origin master;;
-            [Nn]* ) echo -n "";;
+            [Nn]* ) echo "Not updating git repo";;
             * ) echo "Not updating git repo";;
         esac
 
