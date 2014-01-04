@@ -5,20 +5,6 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# User specific aliases and functions
-RESET='\e[0m'
-DARKGRAY='\e[38;5;239m'
-GRAY='\e[38;5;243m'
-LGRAY='\e[38;5;250m'
-TRUE='\e[1;30;40m'
-FALSE='\e[1;30;31m'
-
-# Bash line
-RET='$(if [[ $? = 0 ]]; then echo -ne "\[$TRUE\]> \[$RESET"; else echo -ne "\[$FALSE\]> \[$RESET"; fi;)'
-PS1="\[$LGRAY\]\A\[$RESET\] \[$DARKGRAY\]\u@\[$RESET\]\[$GRAY\]\h \W\[$RESET\] $RET"
-
-EDITOR=vim
-
 if [ -d $HOME/.config/ ]; then
     if [[ -d $HOME/.config/dotfiles && -f $HOME/.config/dotfiles/envvar ]]; then
         . $HOME/.config/dotfiles/envvar

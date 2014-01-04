@@ -21,9 +21,6 @@ If there is need for new configuration, just add a new *.local* file, and it wil
 By default there several sub-directories which will be searched through by bashrc.
 If there are any files in these directories, which are not excluded (view envvar), they are added.
 To allow spesific where to load the directory, there is just the matter of adding a init.conf file (this will always be read first)
- * alias
- * bin
- * osx
 
 #### alias
 This directory contains all the alases which will be added. This directory will after a while contain many aliases separated into files.
@@ -36,8 +33,11 @@ This directory contains a init.conf which will add the bin directory to **$PATH*
 The OSX directory also contains and init.conf, which only loads the directory if it is running on a Darwin machine.
 Here there are posibilities to overwrite aliases, such as ls --color which does not work in termnial.app
 
-#### Misc
+#### misc
 All the other files which should be loaded.
+
+#### theme
+Edit the init.conf variable theme to the name of the file of the theme to be loaded.
 
 ### All the other files
 By default, there are files described in envvar which are excluded from beeing loaded.
