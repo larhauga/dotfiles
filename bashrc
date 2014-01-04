@@ -18,7 +18,6 @@ RET="$(if [[ $? = 0 ]]; then echo -ne "\[$TRUE\]> \[$RESET"; else echo -ne "\[$F
 PS1="\[$LGRAY\]\A\[$RESET\] \[$DARKGRAY\]\u@\[$RESET\]\[$GRAY\]\h \W\[$RESET\] $RET"
 
 EDITOR=vim
-verbose=1
 
 if [ -d $HOME/.config/ ]; then
     if [[ -d $HOME/.config/dotfiles && -f $HOME/.config/dotfiles/envvar ]]; then
@@ -33,29 +32,31 @@ if [ -d $HOME/.config/ ]; then
         dotdir="$HOME/.config/dotfiles"
     fi
 
-    for file in $dotdir/*
+    for base in $dotdir/*
     do
-        if [ -f $file ] && [[ ! $file =~ ".swp"|"bashrc"|"tmux.conf"|"envvar"$|"dotfiles.sh"$|"md"$ ]]; then
-            if [[ `hostname` =~ $jump ]]; then
-                if [[ ! $file =~ $workfend ]]; then
-                    . $file
-                fi
-            elif [[ `hostname` =~ $workdomain ]]; then
-                if [[ $file =~ $workfend|"conf$" ]]; then
-                    . $file
-                fi
-            elif [[ `hostname` =~ $allconf ]]; then
-                if [[ $file =~ "conf"$ ]]; then
-                    . $file
-                fi
+        # Must be directory, not backup folder, not excluded folders and must contain files
+        if [ -d $base ] && [[ ! $base =~ "backup" && ! $base =~ $exclude_folder && ! -z `ls $base/` ]]; then
+            # Let init.conf load the other config from the folder.
+            # Useful when needing to test for environments
+            if [ -f $base/init.conf ]; then
+                . $base/init.conf
             else
-                if [[ ! $file =~ $workfend|"tmux"|"bashrc"|"gitignore" ]]; then
-                    if [ $verbose -eq 1 ]; then
-                        echo "Loading spesial file: $file; Add machine to envvar to default load"
+                # If no init file we load the whole folder
+                for import in $base/*
+                do
+                    # Exlude files defined in envvar
+                    if [[ ! $import =~ $exclude ]]; then
+                        . $import
                     fi
-                    . $file
-                fi
+                done
+                unset import
             fi
+        # Load file if it is in base folder, and not to be excluded
+        elif [ -f $base ] && [[ ! $base =~ $exclude ]]; then
+            . $base
         fi
     done
+    unset base
+    unset exclude
+    unset exclude_folder
 fi
