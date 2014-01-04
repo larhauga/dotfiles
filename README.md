@@ -36,6 +36,9 @@ This directory contains a init.conf which will add the bin directory to **$PATH*
 The OSX directory also contains and init.conf, which only loads the directory if it is running on a Darwin machine.
 Here there are posibilities to overwrite aliases, such as ls --color which does not work in termnial.app
 
+#### Misc
+All the other files which should be loaded.
+
 ### All the other files
 By default, there are files described in envvar which are excluded from beeing loaded.
 This means that if there are added new files to the dotfile directory, they will be added.
