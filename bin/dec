@@ -1,0 +1,11 @@
+#! /bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <filename>"
+else
+    if [ -f $(which openssl) ]; then
+        $(which openssl) aes-256-cbc -d -a -in $1 -out $(echo $1| sed -e s/.enc$/.dec/g)
+    else
+        echo "No openssl on the system"
+    fi
+fi
