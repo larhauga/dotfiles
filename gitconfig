@@ -5,7 +5,7 @@
     editor = vim
     excludesfile = $dotdir/.gitignore_global
 [user]
-    name = larhauga
+    name = Lars Haugan
     email = lars@larshaugan.net
 [color]
     ui = true
