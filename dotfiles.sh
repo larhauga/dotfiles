@@ -32,6 +32,7 @@ if [ $# -eq 1 ]; then
         mkdir "$backup_dir/$time"
         cp $HOME/.bashrc "$backup_dir/$time"
         cp $HOME/.tmux.conf "$backup_dir/$time"
+        cp $HOME/.gitconfig "$backup_dir/$time"
 
         read -p "Do you want to update git repo first? (y/N) " yn
         case $yn in
@@ -42,8 +43,10 @@ if [ $# -eq 1 ]; then
 
         rm $HOME/.bashrc
         rm $HOME/.tmux.conf
+        rm $HOME/.gitconfig
         ln -s $config_dir/bashrc ~/.bashrc
         ln -s $config_dir/tmux.conf ~/.tmux.conf
+        ln -s $config_dir/gitconfig ~/.gitconfig
         echo "New configuration installed"
 
     elif [ "$1" = "rollback" ]; then

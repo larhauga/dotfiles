@@ -4,20 +4,24 @@
 [core]
     editor = vim
     excludesfile = $dotdir/.gitignore_global
+
 [user]
     name = Lars Haugan
     email = lars@larshaugan.net
+
 [color]
     ui = true
     branch = true
+
 [credential]
     helper = cache --timeout=3600
-[push]
-    default = simple
+
 [diff]
     tool = vimdiff
+
 [difftool]
     prompt = false
+
 [alias]
     # listing aliases
     la = "!git config -l | grep alias | cut -c 7-"
