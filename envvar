@@ -1,3 +1,3 @@
 dotdir="$HOME/.config/dotfiles"
-exclude="swp$|bashrc|tmux.conf|gitignore|README.md|envvar|dotfiles.sh|gitconfig"
+exclude="swp$|bashrc|tmux.conf|gitignore|README.md|envvar|dotfiles.sh|gitconfig|vimconf"
 exclude_folder="swp$|.md|README*|backup"
