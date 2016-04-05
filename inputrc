@@ -1,0 +1,11 @@
+$include /etc/inputrc
+TAB: complete 
+
+set completion-ignore-case On
+set completion-query-items 150
+set enable-keypad On
+set bell-style none
+set menu-complete-display-prefix On
+set show-all-if-ambiguous On
+set skip-completed-text On
+

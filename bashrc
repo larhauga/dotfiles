@@ -15,7 +15,7 @@ if [ -d $HOME/.config/ ]; then
     for base in $dotdir/*; do
         # Must be directory, not backup folder, not excluded folders and must contain files
         if [ -d $base ] && [[ ! $base =~ "backup" && ! $base =~ $exclude_folder && ! -z `ls $base/` ]]; then
-            # sub init.conf to load sub scripts 
+            # sub init.conf to load sub scripts
             if [ -f $base/init.conf ]; then
                 . $base/init.conf
             else
@@ -35,3 +35,5 @@ if [ -d $HOME/.config/ ]; then
     unset exclude
     unset exclude_folder
 fi
+
+# Putt other add-hoc stuff here .config/dotfiles/misc/exports.conf

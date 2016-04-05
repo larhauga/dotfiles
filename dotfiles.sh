@@ -33,13 +33,7 @@ if [ $# -eq 1 ]; then
         cp $HOME/.bashrc "$backup_dir/$time"
         cp $HOME/.tmux.conf "$backup_dir/$time"
         cp $HOME/.gitconfig "$backup_dir/$time"
-
-        read -p "Do you want to update git repo first? (y/N) " yn
-        case $yn in
-            [Yy]* ) git pull origin master;;
-            [Nn]* ) echo "Not updating git repo";;
-            * ) echo "Not updating git repo";;
-        esac
+        cp $HOME/.inputrc "$backup_dir/$time"
 
         rm $HOME/.bashrc
         rm $HOME/.tmux.conf
@@ -47,6 +41,7 @@ if [ $# -eq 1 ]; then
         ln -s $config_dir/bashrc ~/.bashrc
         ln -s $config_dir/tmux.conf ~/.tmux.conf
         ln -s $config_dir/gitconfig ~/.gitconfig
+        ln -s $config_dir/inputrc ~/.inputrc
         echo "New configuration installed"
 
     elif [ "$1" = "rollback" ]; then
