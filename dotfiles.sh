@@ -30,10 +30,10 @@ if [ $# -eq 1 ]; then
             mkdir $backup_dir
         fi
         mkdir "$backup_dir/$time"
-        cp $HOME/.bashrc "$backup_dir/$time"
-        cp $HOME/.tmux.conf "$backup_dir/$time"
-        cp $HOME/.gitconfig "$backup_dir/$time"
-        cp $HOME/.inputrc "$backup_dir/$time"
+        cp $HOME/.bashrc "$backup_dir/$time" 2>/dev/null
+        cp $HOME/.tmux.conf "$backup_dir/$time" 2>/dev/null
+        cp $HOME/.gitconfig "$backup_dir/$time" 2>/dev/null
+        cp $HOME/.inputrc "$backup_dir/$time" 2>/dev/null
 
         rm $HOME/.bashrc
         rm $HOME/.tmux.conf
